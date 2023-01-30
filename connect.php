@@ -5,7 +5,7 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-function DataInput($data)
+function dataInput($data)
 {
     $data = trim($data);
     $data = stripslashes($data);
