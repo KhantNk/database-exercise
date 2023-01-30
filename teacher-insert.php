@@ -1,14 +1,5 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "school";
-
-$conn = new mysqli($servername, $username, $password, $db);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+include_once ('connect.php');
 if (isset($_POST['submit'])) {
     $valid = true;
     $name =  $_POST['name'];
@@ -18,10 +9,10 @@ if (isset($_POST['submit'])) {
         $gender = "";
     }
     $address = $_POST['address'];
-    $ph_01 =$_POST['ph-number-01'];
-    $ph_02 = $_POST['ph-number-02'];
+    $phone01 = $_POST['ph-number-01'];
+    $phone02 = $_POST['ph-number-02'];
     $email = $_POST['email'];
-    $join = $_POST['join-date'];
+    $joinDate = $_POST['join-date'];
     if (isset($_POST['status'])) {
         $status = $_POST['status'];
     } else {
@@ -35,9 +26,15 @@ if (isset($_POST['submit'])) {
     if (empty($gender)) {
         $valid = false;
         echo "Gender is required";
-    } else {
-        $gender = test_input($_POST["gender"]);
+    } 
+
+    if($gender == "male" || $gender == "female" ||$gender == "other" ){
+        $valid = True;
+    }else{
+        $valid = false;
+        echo "Gender is not valid";
     }
+    
     if (empty($address)) {
         $valid = false;
         echo "Address is required";
@@ -46,58 +43,60 @@ if (isset($_POST['submit'])) {
         $valid = false;
         echo "Email is required";
     } else {
-        $email = test_input($email);
+        $email = dataInput($email);
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-           echo "Invalid email format";
+            echo "Invalid email format";
         }
     }
-    if (empty($ph_01)) {
+    if (empty($phone01)) {
         $valid = false;
         echo "Phone number is required";
     }
 
-    if (preg_match('/^[0-9]+$/', $ph_01)) {
-        echo "Valid Phone Number";
-    } else {
+    if (!preg_match('/^[0-9]+$/', $phone01)) {
+        $valid = false;
         echo "Invalid Phone Number";
     }
 
-    if (preg_match('/^[0-9]+$/', $ph_02)) {
-        echo "Valid Phone Number";
-    } else {
+    if (empty($phone02)) {
+        $valid = false;
+        echo "Phone number is required";
+    }
+
+    if (!preg_match('/^[0-9]+$/', $phone02)) {
+        $valid = false;
         echo "Invalid Phone Number";
     }
-    
-    if (empty($join)) {
+
+    if (empty($joinDate)) {
         $valid = false;
         echo "Join Date is required";
     }
+    
+    if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$joinDate)) {
+        $valid = false;
+        echo "Invalid Date Format";
+    }
+
     if (empty($status)) {
         $valid = false;
         echo "Status is required";
     }
-    
+
     if (empty($nrc)) {
         $valid = false;
         echo "nrc is required";
     }
 
+
     if ($valid) {
-        $sql = "INSERT INTO teachers VALUES (null,'$name','$email','$nrc','$ph_01','$ph_02','$address','$gender','$join','$status',NOW(),NOW())";
-        if ($conn->query($sql) === TRUE) {
+        $sql = "INSERT INTO teachers VALUES (null,'$name','$email','$nrc','$phone01','$phone02','$address','$gender','$joinDate','$status',NOW(),NOW())";
+        if ($con->query($sql) === TRUE) {
             echo "Data Inserted Successfully";
         } else {
-            echo "Error creating table: " . $conn->error;
+            echo "Error creating table: " . $con->error;
         }
     }
 }
 
-function test_input($data)
-{
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-}
-
-$conn->close();
+$con->close();

@@ -55,8 +55,8 @@
               <input type="date" class="form-control" id="join-date" name="join-date" />
             </div>
             <div class="form-group pb-3">
-              <input type="radio" name="status" value="Active" />Active
-              <input type="radio" name="status" value="Left" />Resigned
+              <input type="radio" name="status" value="T" />Active
+              <input type="radio" name="status" value="F" />Resigned
             </div>
             <input name=submit type="submit" class="btn btn-primary" />
           </form>

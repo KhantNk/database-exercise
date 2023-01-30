@@ -1,59 +1,70 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$db = "school";
-
-$conn = new mysqli($servername, $username, $password, $db);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+include_once('connect.php');
 
 if (isset($_POST['submit'])) {
     $valid = true;
-    $stu_name =  $_POST['stu-name'];
+    $name =  $_POST['stu-name'];
     if (isset($_POST['stu-gender'])) {
-        $stu_gender = $_POST['stu-gender'];
+        $gender = $_POST['stu-gender'];
     } else {
-        $stu_gender = "";
+        $gender = "";
     }
-    $stu_address = $_POST['stu-address'];
-    $stu_email = $_POST['stu-email'];
-    $stu_ph_num = $_POST['stu-ph-number'];
-    $stu_dob = $_POST['stu-dob'];
-    if (empty($stu_name)) {
+    $address = $_POST['stu-address'];
+    $email = $_POST['stu-email'];
+    $phone = $_POST['stu-ph-number'];
+    $dob = $_POST['stu-dob'];
+    if (empty($name)) {
         $valid = false;
         echo "Name is required";
     }
-    if (empty($stu_gender)) {
+    if (empty($gender)) {
         $valid = false;
         echo "Gender is required";
     }
-    if (empty($stu_address)) {
+
+    if ($gender == "male" || $gender == "female" || $gender == "other") {
+        $valid = True;
+    } else {
+        $valid = false;
+        echo "Gender is not valid";
+    }
+    
+    if (empty($address)) {
         $valid = false;
         echo "Address is required";
     }
-    if (empty($stu_email)) {
+    if (empty($email)) {
         $valid = false;
         echo "Email is required";
     }
-    if (empty($stu_ph_num)) {
+    if (empty($phone)) {
         $valid = false;
         echo "Phone number is required";
     }
-    if (empty($stu_dob)) {
+
+    if (!preg_match('/^[0-9]+$/', $phone)) {
+        $valid = false;
+        echo "Invalid Phone Number";
+    }
+    
+    if (empty($dob)) {
         $valid = false;
         echo "Date of birth is required";
     }
+
+    if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/", $dob)) {
+        $valid = false;
+        echo "Invalid Date Format";
+    }
     
     if ($valid) {
-        $sql = "INSERT INTO students VALUES (null,'$stu_name','$stu_email','$stu_ph_num','$stu_address','$stu_gender','$stu_dob',NOW(),NOW())";
-        if ($conn->query($sql) === TRUE) {
+        $sql = "INSERT INTO students VALUES (null,'$name','$email','$phone','$address','$gender','$dob',NOW(),NOW())";
+        if ($con->query($sql) === TRUE) {
             echo "Data Inserted Successfully";
         } else {
-            echo "Error creating table: " . $conn->error;
+            echo "Error creating table: " . $con->error;
         }
     }
 }
 
-$conn->close();
+$con->close();
