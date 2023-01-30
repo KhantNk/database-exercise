@@ -37,20 +37,16 @@
             </div>
             <div class="form-group pb-3">
               <label for="stu-gender">Gender</label>
-              <div>
-                <label for="male" class="radio-inline pr-2"><input type="radio" name="stu-gender" value="m"
-                    id="male" />Male</label>
-                <label for="female" class="radio-inline p-2"><input type="radio" name="stu-gender" value="f"
-                    id="female" />Female</label>
-                <label for="others" class="radio-inline"><input type="radio" name="stu-gender" value="o"
-                    id="others" />Others</label>
-              </div>
+              <input type="radio" name="stu-gender" value="male" />Male
+              <input type="radio" name="stu-gender" value="female" />Female
+              <input type="radio" name="stu-gender" value="other" />Other
             </div>
+
             <div class="form-group pb-3" data-provide="datepicker">
               <label for="stu-dob">Date of Birth</label>
               <input type="date" class="form-control" id="stu-dob" name="stu-dob" />
             </div>
-            <input type="submit" class="btn btn-primary" />
+            <input name=submit type="submit" class="btn btn-primary" />
           </form>
         </div>
       </div>

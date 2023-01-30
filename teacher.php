@@ -34,11 +34,11 @@
             </div>
             <div class="form-group pb-3">
               <label for="ph-number-01">Phone Number 1</label>
-              <input type="number" class="form-control" id="ph-number-01" name="ph-number-01" />
+              <input type="text" class="form-control" id="ph-number-01" name="ph-number-01" />
             </div>
             <div class="form-group pb-3">
               <label for="ph-number-02">Phone Number 2</label>
-              <input type="number" class="form-control" id="ph-number-02" name="ph-number-02" />
+              <input type="text" class="form-control" id="ph-number-02" name="ph-number-02" />
             </div>
             <div class="form-group pb-3">
               <label for="address">Address</label>
@@ -46,29 +46,19 @@
             </div>
             <div class="form-group pb-3">
               <label for="gender">Gender</label>
-              <div>
-                <label for="male" class="radio-inline pr-2"><input type="radio" name="gender" value="m"
-                    id="male" />Male</label>
-                <label for="female" class="radio-inline p-2"><input type="radio" name="gender" value="f"
-                    id="female" />Female</label>
-                <label for="others" class="radio-inline"><input type="radio" name="gender" value="o"
-                    id="others" />Others</label>
-              </div>
+              <input type="radio" name="gender" value="male" />Male
+              <input type="radio" name="gender" value="female" />Female
+              <input type="radio" name="gender" value="other" />Other
             </div>
             <div class="form-group pb-3" data-provide="datepicker">
               <label for="join-date">Join Date</label>
               <input type="date" class="form-control" id="join-date" name="join-date" />
             </div>
             <div class="form-group pb-3">
-              <label for="status">Status</label>
-              <div>
-                <label for="status" class="radio-inline pr-2"><input type="radio" name="status" value="false"
-                    id="status" />Active</label>
-                <label for="status" class="radio-inline p-2"><input type="radio" name="status" value="true"
-                    id="status" />Resigned</label>
-              </div>
+              <input type="radio" name="status" value="Active" />Active
+              <input type="radio" name="status" value="Left" />Resigned
             </div>
-            <input type="submit" class="btn btn-primary" />
+            <input name=submit type="submit" class="btn btn-primary" />
           </form>
         </div>
       </div>
