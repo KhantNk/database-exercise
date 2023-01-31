@@ -43,11 +43,13 @@ if (isset($_POST['submit'])) {
         $valid = false;
         echo "Email is required";
     } else {
+        $valid = false;
         $email = dataInput($email);
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             echo "Invalid email format";
         }
     }
+    
     if (empty($phone01)) {
         $valid = false;
         echo "Phone number is required";
