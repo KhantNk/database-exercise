@@ -37,7 +37,7 @@
             </div>
             <div class="form-group pb-3">
               <label for="duration">Course Duration</label>
-              <input type="text" class="form-control" id="duration" name="duration" />
+              <input type="number" class="form-control" id="duration" name="duration" />
             </div>
             <input name=submit type="submit" class="btn btn-primary" />
           </form>
