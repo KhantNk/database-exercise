@@ -40,10 +40,12 @@ if (isset($_POST['submit'])) {
     }
     if($valid){
         $sql = "INSERT INTO courses VALUES (null,'$courseName','$description','$totalLesson','$startDate','$duration',NOW(),NOW())";
-        if ($con->query($sql) === TRUE) {
+        if ($conn->query($sql) === TRUE) {
             echo "Data Inserted Successfully";
         } else {
-            echo "Error creating table: " . $con->error;
+            echo "Error creating table: " . $conn->error;
         }
     }
 }
+
+$conn->close();

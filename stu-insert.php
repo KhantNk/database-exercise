@@ -58,10 +58,12 @@ if (isset($_POST['submit'])) {
     }
     if ($valid) {
         $sql = "INSERT INTO students VALUES (null,'$name','$email','$phone','$address','$gender','$dob',NOW(),NOW())";
-        if ($con->query($sql) === TRUE) {
+        if ($conn->query($sql) === TRUE) {
             echo "Data Inserted Successfully";
         } else {
-            echo "Error creating table: " . $con->error;
+            echo "Error creating table: " . $conn->error;
         }
     }
 }
+
+$conn->close();

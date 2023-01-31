@@ -79,10 +79,12 @@ if (isset($_POST['submit'])) {
     }
     if ($valid) {
         $sql = "INSERT INTO teachers VALUES (null,'$name','$email','$nrc','$phone01','$phone02','$address','$gender','$joinDate','$status',NOW(),NOW())";
-        if ($con->query($sql) === TRUE) {
+        if ($conn->query($sql) === TRUE) {
             echo "Data Inserted Successfully";
         } else {
-            echo "Error creating table: " . $con->error;
+            echo "Error creating table: " . $conn->error;
         }
     }
 }
+
+$conn->close();
