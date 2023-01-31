@@ -14,7 +14,10 @@ $result = $con->query($sql);
 </head>
 
 <body>
-  <table border="1">
+  <?php
+  if (mysqli_num_rows($result) > 0) {
+  ?>
+  <table>
     <tr>
       <th>Course ID</th>
       <th>Course Name</th>
@@ -24,21 +27,27 @@ $result = $con->query($sql);
       <th>Duration</th>
     </tr>
     <?php
-        if ($result->num_rows > 0) {
-            while ($data = $result->fetch_assoc()) {
-        ?>
+      $i = 0;
+      while ($row = mysqli_fetch_array($result)) {
+      ?>
     <tr>
-      <td><?php echo $data['course_id']; ?> </td>
       <td><?php echo $data['course_name']; ?> </td>
       <td><?php echo $data['description']; ?> </td>
       <td><?php echo $data['total_lessons']; ?> </td>
       <td><?php echo $data['start_date']; ?> </td>
       <td><?php echo $data['course_duration']; ?> </td>
+      <td><a href="update-process.php?id=<?php echo $data["id"]; ?>">Update</a></td>
     </tr>
     <?php
-            }
-        } ?>
+        $i++;
+      }
+      ?>
   </table>
+  <?php
+  } else {
+    echo "No result found";
+  }
+  ?>
 </body>
 
 </html>
